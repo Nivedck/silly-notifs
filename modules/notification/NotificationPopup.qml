@@ -44,10 +44,10 @@ PanelWindow {
     ]
 
     function delay(delayTime, cb) {
-        timer.interval = delayTime;
-        timer.repeat = false;
-        timer.triggered.connect(cb);
-        timer.start();
+        time.interval = delayTime;
+        time.repeat = false;
+        time.triggered.connect(cb);     // : ( 
+        time.start();
     }
 
     NotificationServer {
@@ -128,7 +128,7 @@ PanelWindow {
         removeDisplaced: Transition {
             NumberAnimation {
                 properties: "x,y"
-                duration: 300
+                duration: 100  //300
                 easing.type: Easing.OutQuad
             }
         }
