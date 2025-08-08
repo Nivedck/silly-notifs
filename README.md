@@ -65,18 +65,17 @@ For Software:
 
 # Screenshots (Add at least 3)
 ![Screenshot1](images/scr1.png)
-*Caption for screenshot 1*
+
 
 ![Screenshot2](images/scr2.png)
-*Caption for screenshot 2*
+
 
 ![Screenshot3](images/scr3.png)
-*Caption for screenshot 3*
+
 
 # Video
-<video src="images/useless.mp4" controls="controls" style="max-width: 100%;">
-</video>
-*Explain what the video demonstrates*
+![Useless Video](images/useless.mp4)
+
 
 
 ## Team Contributions
