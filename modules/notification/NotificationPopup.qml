@@ -67,21 +67,6 @@ PanelWindow {
     ListModel {
         id: notificationModel
     }
-
-    Rectangle {
-        id: interactiveMask
-
-        anchors {
-            right: parent.right
-            top: parent.top
-            bottom: parent.bottom
-        }
-
-        color: "transparent"
-        implicitWidth: 400
-        implicitHeight: Math.max(listView.contentHeight + 10, parent.height)
-    }
-
     ListView {
         id: listView
         width: parent.width
@@ -150,7 +135,7 @@ PanelWindow {
                 id: container
                 width: parent.width
                 height: parent.height
-                property real blurAmount: 2.5
+               property real blurAmount: 2.5
                 transformOrigin: Item.Center
                 scale: 0.3
                 rotation: 0
@@ -237,22 +222,7 @@ PanelWindow {
                                     family: "CaskaydiaCove NF"
                                 }
                             }
-
-                            Text {
-                                id: bodyText
-                                width: parent.width
-                                text: model.body || ""
-                                color: Qt.rgba(0, 0, 0, 0.8)
-                                wrapMode: Text.WordWrap
-                                maximumLineCount: 3
-                                elide: Text.ElideRight
-                                font {
-                                    pixelSize: 13
-                                    family: "CaskaydiaCove NF"
-                                }
-                            }
-                        }
-                    }
+                   }
                 }
 
                 SequentialAnimation {
@@ -297,7 +267,6 @@ PanelWindow {
                     NumberAnimation {
                         target: container
                         property: "y"
-                        to: window.height + container.height
                         duration: 600
                         easing.type: Easing.InQuad
                     }
