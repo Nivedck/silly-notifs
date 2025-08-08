@@ -44,10 +44,10 @@ PanelWindow {
     ]
 
     function delay(delayTime, cb) {
-        time.interval = delayTime;
-        time.repeat = false;
-        time.triggered.connect(cb);     // : ( 
-        time.start();
+        timer.interval = delayTime;
+        timer.repeat = false;
+        timer.triggered.connect(cb);
+        timer.start();
     }
 
     NotificationServer {
@@ -67,6 +67,21 @@ PanelWindow {
     ListModel {
         id: notificationModel
     }
+
+    Rectangle {
+        id: interactiveMask
+
+        anchors {
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+        }
+
+        color: "transparent"
+        implicitWidth: 400
+        implicitHeight: Math.max(listView.contentHeight + 10, parent.height)
+    }
+
     ListView {
         id: listView
         width: parent.width
@@ -113,7 +128,7 @@ PanelWindow {
         removeDisplaced: Transition {
             NumberAnimation {
                 properties: "x,y"
-                duration: 100  //300
+                duration: 300
                 easing.type: Easing.OutQuad
             }
         }
@@ -126,7 +141,7 @@ PanelWindow {
             id: notificationItem
             width: 400
             implicitHeight: Math.max(80, contentContainer.implicitHeight + 20)
-            anchors.right: parent.right ?? 0
+            anchors.right: parent.right
             anchors.rightMargin: 10
 
             property var selectedAsset: notificationAssets[Math.floor(Math.random() * notificationAssets.length)]
@@ -135,7 +150,7 @@ PanelWindow {
                 id: container
                 width: parent.width
                 height: parent.height
-               property real blurAmount: 2.5
+                property real blurAmount: 2.5
                 transformOrigin: Item.Center
                 scale: 0.3
                 rotation: 0
@@ -222,7 +237,22 @@ PanelWindow {
                                     family: "CaskaydiaCove NF"
                                 }
                             }
-                   }
+
+                            Text {
+                                id: bodyText
+                                width: parent.width
+                                text: model.body || ""
+                                color: Qt.rgba(0, 0, 0, 0.8)
+                                wrapMode: Text.WordWrap
+                                maximumLineCount: 3
+                                elide: Text.ElideRight
+                                font {
+                                    pixelSize: 13
+                                    family: "CaskaydiaCove NF"
+                                }
+                            }
+                        }
+                    }
                 }
 
                 SequentialAnimation {
@@ -267,6 +297,7 @@ PanelWindow {
                     NumberAnimation {
                         target: container
                         property: "y"
+                        to: window.height + container.height
                         duration: 600
                         easing.type: Easing.InQuad
                     }
@@ -321,8 +352,7 @@ PanelWindow {
                         fallWithDrift.start();
                         dismissSound.play();
                         delay(3000, function () {
-                            if (exitAnimation != null)
-                                exitAnimation.start();
+                            exitAnimation.start();
                         });
                     } else {
                         container.rotation = 0;
@@ -338,4 +368,3 @@ PanelWindow {
         }
     }
 }
-
