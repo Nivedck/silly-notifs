@@ -76,6 +76,8 @@ For Software:
 # Video
 ![Useless Video](images/useless.mp4)
 
+[Silly Notifs in Action](https://youtu.be/AyRUWqjfLdw)
+
 
 
 ## Team Contributions
